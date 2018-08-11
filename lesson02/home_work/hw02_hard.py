@@ -5,6 +5,10 @@ equation = 'y = -12x + 11111140.2121'
 x = 2.5
 # вычислите и выведите y
 
+k = float(equation[equation.find('=') + 1:equation.find('x')])
+b = float(equation[equation.find('+') + 1:])
+y = k * x + b
+print(y)
 
 # Задание-2: Дата задана в виде строки формата 'dd.mm.yyyy'.
 # Проверить, корректно ли введена дата.
@@ -17,13 +21,30 @@ x = 2.5
 #  (т.е. 2 символа для дня, 2 - для месяца, 4 - для года)
 
 # Пример корректной даты
-date = '01.11.1985'
+# date = '01.11.1985'
 
 # Примеры некорректных дат
-date = '01.22.1001'
-date = '1.12.1001'
-date = '-2.10.3001'
+# date = '01.22.1001'
+# date = '1.12.1001'
+# date = '-2.10.3001'
 
+date = input('Введите дату в формате dd.mm.yyyy : ')
+date = date.split('.')
+if len(date[0]) != 2 or len(date[1]) != 2 or len(date[2]) != 4:
+    print('Дата введена не корректно!')
+else:
+    day = int(date[0])
+    mounth = int(date[1])
+    year = int(date[2])
+    lst31 = [1, 3, 5, 7, 8, 10, 12]
+    x = 30
+    for i in lst31:
+        if mounth == i:
+            x = 31
+    if 1 <= day <= x and 1 <= mounth <= 12 and 1 <= year <= 9999:
+        print('Дата введена корректно!')
+    else:
+        print('Дата введена не верно!')
 
 # Задание-3: "Перевёрнутая башня" (Задача олимпиадного уровня)
 #
@@ -54,3 +75,17 @@ date = '-2.10.3001'
 #
 # Вход: 11
 # Выход: 5 3
+
+N = int(input('Введите номер комнаты: '))
+floor = 1
+room = 1
+x = 1
+cub = 1
+while N > x:
+    cub += 1
+    x += cub ** 2
+floor = int((cub + 1) * cub / 2)
+x -= N
+floor -= x // cub
+room = cub - x % cub
+print(floor, room)
